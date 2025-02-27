@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+
+    <script src="js/prueba.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            margin-top: 5vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: radial-gradient(blue, rebeccapurple);            
+        }
+        #titulo-header{
+            color: white;
+            font-size: 3em;
+            text-transform: uppercase;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        #container, #div-editor{
+            background-color: white;
+            border-radius: 8px;
+        }
+        #container{
+            width: 90%;
+            height: 60vh;
+            margin: 5vh 0;
+        }
+        #div-buttons{
+            margin: 5vh 0;
+        }
+        #div-buttons > button{
+            font-size: 1em;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 3px 5px 5px;
+            transition: 0.3s;
+            &:hover{
+                cursor: pointer;
+                scale: 1.15;
+                background-color: #2f2beb;
+                box-shadow: 3px 10px 10px -5px black;
+                color: white;
+                border-color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="titulo-header">Editor WYSIWYG</h1>
+    <div id="container">
+        <div id="toolbar"></div>
+        <div id="div-editor"></div>
+    </div>
+    <div id="div-upload-file"></div>
+    <div id="div-buttons">
+        <button id="btn-save">Guardar</button>
+        <!-- <button id="btn-upload">Cargar plantilla</button> -->
+    </div>
+
+</body>
+</html>
