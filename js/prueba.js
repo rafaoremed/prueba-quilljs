@@ -31,23 +31,9 @@ function main(){
             toolbar: toolbarOptions
         },
         placeholder: 'Escriba su plantilla o arrastre y suelte su plantilla html.'
-
-
     });
 
-    // Ejemplo de inserciones, texto e imagen
-    /* 
-    const Delta = Quill.import('delta');
-    quill.setContents(
-    new Delta()
-        .insert('Hello, ')
-        .insert('World', { bold: true })
-        .insert('\n')
-    ); 
-    
-    quill.insertEmbed(10, 'image', 'https://picsum.photos/200/300');
-    */
-
+    console.log(quill);
 
     // Al soltar un achivo
     document.getElementById("div-editor").addEventListener("drop", function(e){
@@ -64,15 +50,46 @@ function main(){
                         console.log(htmlContent);
                         quill.clipboard.dangerouslyPasteHTML(htmlContent);
                     }
-
-
-                    
                     // Leer el archivo como texto
                     reader.readAsText(file);
                 }   
             })
         }
     })
+
+
+    // Aplicar estilos desde un botón
+    $(".btn-mask").each(function(){
+        $(this).click(function(e){
+            e.preventDefault();
+            if(quill.getSelection() == null || quill.getSelection().length < 1){
+                window.alert("Seleccione un texto para aplicar el estilo");
+            }else{
+                const range = quill.getSelection();
+                let textSelection = quill.getText(range.index, range.length);
+                let maskContent = $(e.target).attr("data-content");
+                // console.log($(e.target).attr("data-content"));
+                let newContent = maskContent.replace("</span>", textSelection + "</span>");
+                // console.log(newContent);
+                quill.deleteText(range.index, range.length);
+                quill.clipboard.dangerouslyPasteHTML(range.index, newContent);
+            }
+        })
+    })
+
+    // Cargar plantilla desde un botón
+    $(".btn-plantilla").each(function(){
+        $(this).click(function(e){
+            e.preventDefault();
+            let contenido = $(e.target).attr("data-content");
+            if(quill.getSelection() == null){
+                window.alert("Seleccione un lugar en el editor para pegar el contenido");
+            }else{
+                quill.clipboard.dangerouslyPasteHTML(quill.getSelection().index, contenido);
+            }
+        })
+    })
+   
 
     document.getElementById("btn-save").addEventListener("click", function(e){
         e.preventDefault();
@@ -83,6 +100,7 @@ function main(){
 function guardarContenido(editor){
     const contenido = editor.getSemanticHTML();
     console.log(contenido);
+    window.alert(contenido);
     // TODO exportar el contenido del div (?)
 }
 

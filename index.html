@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="js/jquery-3.7.1.slim.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 
@@ -15,26 +16,40 @@
             box-sizing: border-box;
         }
         body{
-            margin-top: 5vh;
+            margin-top: 2vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: space-evenly;
             background: radial-gradient(blue, rebeccapurple);            
         }
         #titulo-header{
+            margin: 5vh 0;
             color: white;
             font-size: 3em;
             text-transform: uppercase;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
-        #container, #div-editor{
+        #container-editor, #div-plantillas {
             background-color: white;
             border-radius: 8px;
         }
-        #container{
-            width: 90%;
-            height: 60vh;
-            margin: 5vh 0;
+        #contenedor{
+            display: flex;
+            gap: 10px;
+        }
+        #container-editor{
+            width: 70%;
+            padding: 10px;
+        }
+
+        #div-plantillas{
+            width: 30%;
+            padding: 10px;
+        }
+        #div-editor{
+            min-height: 50vh;
+            border-color: transparent;
         }
         #div-buttons{
             margin: 5vh 0;
@@ -54,15 +69,56 @@
                 border-color: black;
             }
         }
+        h2.title{
+            text-align: center;
+            padding: 0.5em;
+        }
+        #contenedor-botones > button{
+            padding: 8px;
+        }
+        #contenedor-botones{
+            display:flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
     </style>
 </head>
 <body>
     <h1 id="titulo-header">Editor WYSIWYG</h1>
-    <div id="container">
-        <div id="toolbar"></div>
-        <div id="div-editor"></div>
+    <div id="contenedor">
+        <div id="container-editor">
+            <div id="toolbar"></div>
+            <div id="div-editor"></div>
+        </div>
+        <div id="div-plantillas">
+            <h2 class="title">Plantillas</h2>
+            <div id="contenedor-botones">
+                <button class="btn-plantilla" 
+                data-content="<h1>Orden del día:</h1>
+                    <ol>
+                        <li>
+                            <b>Punto 1:</b>
+                            Lorem ipsum dolor sit amet.
+                        </li>
+                        <li>
+                            <b>Punto 2:</b>
+                            Lorem ipsum dolor sit amet.
+                        </li>
+                        <li>
+                            <b>Punto 3:</b>
+                            Lorem ipsum dolor sit amet.
+                        </li>
+                    </ol>">Orden del día</button>
+                <button class="btn-mask" 
+                data-content='<span style="text-align: center; 
+                font-weight: 600; text-transform: uppercase; color: red;">
+                </span>'>Aplicar estilos</button>
+            </div>
+            <br>
+            <span style='text-align: center; font-weight: bold; text-transform: uppercase; color: red;'>Etiqueta con estilos</span>     
+        </div>
     </div>
-    <div id="div-upload-file"></div>
     <div id="div-buttons">
         <button id="btn-save">Guardar</button>
         <!-- <button id="btn-upload">Cargar plantilla</button> -->
